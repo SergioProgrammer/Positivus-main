@@ -1,0 +1,17 @@
+---
+import Accordion from "../ui/Accordion.astro";
+import SectionTitle from "../ui/SectionTitle.astro";
+import Section from "./Section.astro";
+
+const description = "Nuestro proceso está diseñado para ser simple y efectivo, asegurando que cada paso te acerque a tus objetivos de fitness. Desde la consulta inicial hasta el seguimiento continuo, estamos contigo en cada etapa del camino.";
+---
+
+<Section id="process">
+  <div class="mt-[140px]">
+    <SectionTitle
+      sectionTitle="Nuestro Proceso"
+      description={description}
+    />
+    <Accordion />
+  </div>
+</Section>

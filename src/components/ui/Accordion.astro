@@ -1,0 +1,44 @@
+---
+import AccordionItem from "./AccordionItem.astro";
+
+const content = [
+{
+  index: 1,
+  title: "Consulta",
+  description: "El primer paso es una consulta inicial donde discutiremos tus objetivos, necesidades y expectativas. Esto nos permitirá entender mejor cómo podemos ayudarte a alcanzar tus metas de fitness."
+},
+{
+  index: 2,
+  title: "Planificación",
+  description: "Después de la consulta, crearemos un plan personalizado que se adapte a tus necesidades. Este plan incluirá detalles sobre el tipo de entrenamiento, la nutrición y cualquier otro aspecto relevante para tu progreso."
+},
+{
+  index: 3,
+  title: "Implementación",
+  description: "Una vez que el plan esté listo, comenzaremos a implementarlo. Esto puede incluir sesiones de entrenamiento, asesoramiento nutricional y cualquier otro servicio que hayamos acordado. Nuestro equipo estará contigo en cada paso del camino para asegurarse de que estás en el camino correcto."
+},
+{
+  index: 4,
+  title: "Optimización",
+  description: "A medida que avanzas en tu programa, realizaremos un seguimiento de tu progreso y haremos ajustes según sea necesario. Esto puede incluir cambios en el plan de entrenamiento, ajustes en la dieta o cualquier otra modificación necesaria para maximizar tus resultados."
+},
+{
+  index: 5,
+  title: "Mantenimiento",
+  description: "Una vez que hayas alcanzado tus objetivos, trabajaremos contigo para mantener tus resultados a largo plazo. Esto puede incluir sesiones de seguimiento regulares, ajustes en el plan de entrenamiento y nutrición, y apoyo continuo para asegurarte de que te mantengas en el camino correcto."
+},
+
+];
+---
+
+{
+  content.map((item) => {
+    return (
+      <AccordionItem
+        index={item.index}
+        title={item.title}
+        description={item.description}
+      />
+    );
+  })
+}
