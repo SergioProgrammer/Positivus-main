@@ -84,7 +84,8 @@ import Section from "./Section.astro";
           // Función para obtener el valor de un elemento por su ID
           const getValueById = (id) => {
             const element = document.getElementById(id);
-            return element ? (element as HTMLSelectElement | HTMLTextAreaElement).value : '';
+            // Ya no es necesaria la aserción de tipo aquí. JavaScript lo manejará.
+            return element ? element.value : '';
           };
 
           const nivel = getValueById("nivelEntrenamiento");
