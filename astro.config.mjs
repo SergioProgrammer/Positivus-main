@@ -7,8 +7,8 @@ import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://positivustheme.vercel.app",
+  site: "https://entrenafacil.es",
   integrations: [tailwind()],
-  output: 'server',
+  output: 'static',
   adapter: vercel(),
 });
