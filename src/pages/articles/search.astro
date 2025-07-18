@@ -1,34 +1,40 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
 import ArticleCard from "../../components/ui/ArticleCard.astro";
-import SearchForm from "../../components/ui/SearchForm.astro";
+import Form from "../../components/ui/Form.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
-const query: string | null = Astro.url.searchParams.get('query');
+// CORREGIDO: Usar 'searchParams' para obtener el parámetro de consulta.
+const rawQuery: string | null = Astro.url.searchParams.get('query');
+
+// Manejar el caso donde 'query' es null o una cadena vacía de forma segura.
+// Si no hay query, usaremos una cadena vacía para que la búsqueda no falle.
+const query = rawQuery ? rawQuery.toLowerCase() : '';
 
 const allBlogArticles: CollectionEntry<'blog'>[] = await getCollection('blog');
 
 // Filter articles based on query
-const searchResults = allBlogArticles.filter(article => {
+const Results = allBlogArticles.filter(article => {
+  // Ahora usamos la variable 'query' que ya está saneada y en minúsculas.
   const titleMatch: boolean = article.data.title
     .toLowerCase()
-    .includes(query!.toLowerCase());
+    .includes(query);
 
-    const bodyMatch: boolean = article.body
+  const bodyMatch: boolean = article.body
     .toLowerCase()
-    .includes(query!.toLowerCase());
+    .includes(query);
 
-    const slugMatch: boolean = article.slug
+  const slugMatch: boolean = article.slug
     .toLowerCase()
-    .includes(query!.toLowerCase());
+    .includes(query);
 
-    return titleMatch || bodyMatch || slugMatch
+  return titleMatch || bodyMatch || slugMatch;
 });
 ---
 
-<MainLayout title="Search Results">
-	<main class="space-y-20">
+<MainLayout title={`Results for ${rawQuery || '...'}`}> {/* Título dinámico para los resultados */}
+  <main class="space-y-20">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
 
             <a href="/articles" class="inline-flex items-center font-medium text-black hover:text-green my-4">
@@ -40,14 +46,19 @@ const searchResults = allBlogArticles.filter(article => {
             </a>
 
             <br>
-            <SearchForm />
+            <Form /> {/* Asegúrate de que este es el componente de formulario de búsqueda */}
             <br>
-            <h2 class="text-2xl pb-3 mt-6">Results For <strong>{query}</strong></h2>
+            {/* Si rawQuery es nulo o vacío, mostrar "..." o "no query" */}
+            <h2 class="text-2xl pb-3 mt-6">Results For <strong>{rawQuery || 'your search'}</strong></h2>
             <div class="grid gap-8 lg:grid-cols-2">
-              {searchResults.map(article => (
-                <ArticleCard article={article} />
-              ))}
+              {Results.length > 0 ? (
+                Results.map(article => (
+                  <ArticleCard article={article} />
+                ))
+              ) : (
+                <p>No results found for "{rawQuery || 'your search'}"</p>
+              )}
             </div>  
         </div>
-	</main>
+  </main>
 </MainLayout>
