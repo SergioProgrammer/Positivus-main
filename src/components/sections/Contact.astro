@@ -12,7 +12,6 @@ import Section from "./Section.astro";
     <form
       class="max-w-xl mx-auto bg-white rounded-2xl shadow-lg p-8 space-y-6"
       id="fitness-form"
-      onsubmit="event.preventDefault(); window.open(getWhatsAppUrl(), '_blank');"
     >
       <div>
         <label class="block font-semibold mb-2">Nivel de entrenamiento actual *</label>
@@ -73,21 +72,37 @@ import Section from "./Section.astro";
         Al enviar este formulario, te redirigiremos a WhatsApp para completar la consulta inicial gratuita
       </p>
     </form>
-    <script>
-      function getWhatsAppUrl() {
-        const form = document.getElementById('fitness-form');
-        const nivel = form.querySelector('select:nth-of-type(1)').value;
-        const dias = form.querySelector('select:nth-of-type(2)').value;
-        const experiencia = form.querySelector('select:nth-of-type(3)').value;
-        const alimentacion = form.querySelector('select:nth-of-type(4)').value;
-        const lesion = form.querySelector('textarea:nth-of-type(1)').value;
-        const motivacion = form.querySelector('textarea:nth-of-type(2)').value;
-        const seguimiento = form.querySelector('textarea:nth-of-type(3)').value;
-        const mensaje = encodeURIComponent(
-          `Nivel de entrenamiento: ${nivel}\nDías de entrenamiento: ${dias}\nExperiencia: ${experiencia}\nAlimentación: ${alimentacion}\nLesión/patología: ${lesion}\nMotivación: ${motivacion}\nSeguimiento: ${seguimiento}`
-        );
-        return `https://wa.me/34655689827?text=${mensaje}`;
-      }
+
+    <script type="module">
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("fitness-form");
+        if (!form) return;
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          const getValue = (selector, type) => {
+            const el = form.querySelector(selector);
+            if (!el) return '';
+            return (el as HTMLSelectElement | HTMLTextAreaElement).value || '';
+          };
+
+          const nivel = getValue("select:nth-of-type(1)", "select");
+          const dias = getValue("select:nth-of-type(2)", "select");
+          const experiencia = getValue("select:nth-of-type(3)", "select");
+          const alimentacion = getValue("select:nth-of-type(4)", "select");
+          const lesion = getValue("textarea:nth-of-type(1)", "textarea");
+          const motivacion = getValue("textarea:nth-of-type(2)", "textarea");
+          const seguimiento = getValue("textarea:nth-of-type(3)", "textarea");
+
+          const mensaje = encodeURIComponent(
+            `Nivel de entrenamiento: ${nivel}\nDías de entrenamiento: ${dias}\nExperiencia: ${experiencia}\nAlimentación: ${alimentacion}\nLesión/patología: ${lesion}\nMotivación: ${motivacion}\nSeguimiento: ${seguimiento}`
+          );
+
+          const whatsappUrl = `https://wa.me/34655689827?text=${mensaje}`;
+          window.open(whatsappUrl, "_blank");
+        });
+      });
     </script>
   </div>
 </Section>
