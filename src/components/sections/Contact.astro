@@ -1,0 +1,116 @@
+---
+import SectionTitle from "../ui/SectionTitle.astro";
+import Section from "./Section.astro";
+---
+
+<Section id="contact">
+  <div class="mb-[140px] relative">
+    <SectionTitle
+      sectionTitle="Contacta con nosotros"
+      description="Si tienes alguna pregunta o necesitas más información, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte a alcanzar tus objetivos de fitness."
+    />
+    <form
+      class="max-w-xl mx-auto bg-white rounded-2xl shadow-lg p-8 space-y-6"
+      id="fitness-form"
+    >
+      <div>
+        <label class="block font-semibold mb-2">Nivel de entrenamiento actual *</label>
+        <select id="nivelEntrenamiento" required class="w-full border rounded-lg p-3">
+          <option value="">Selecciona tu nivel</option>
+          <option value="Principiante">Principiante</option>
+          <option value="Intermedio">Intermedio</option>
+          <option value="Avanzado">Avanzado</option>
+        </select>
+      </div>
+      <div>
+        <label class="block font-semibold mb-2">¿Cuántos días a la semana puedes comprometerte a entrenar? *</label>
+        <select id="diasEntrenamiento" required class="w-full border rounded-lg p-3">
+          <option value="">Selecciona los días</option>
+          <option value="1-2">1-2 días</option>
+          <option value="3-4">3-4 días</option>
+          <option value="5-7">5-7 días</option>
+        </select>
+      </div>
+      <div>
+        <label class="block font-semibold mb-2">¿Tienes experiencia previa entrenando en gimnasio o haciendo ejercicio? *</label>
+        <select id="experienciaPrevia" required class="w-full border rounded-lg p-3">
+          <option value="">Selecciona tu experiencia</option>
+          <option value="Sin experiencia">Sin experiencia</option>
+          <option value="Algo de experiencia">Algo de experiencia</option>
+          <option value="Mucha experiencia">Mucha experiencia</option>
+        </select>
+      </div>
+      <div>
+        <label class="block font-semibold mb-2">¿Cómo es actualmente tu alimentación? *</label>
+        <select id="alimentacionActual" required class="w-full border rounded-lg p-3">
+          <option value="">Selecciona tu tipo de alimentación</option>
+          <option value="Equilibrada">Equilibrada</option>
+          <option value="Alta en proteínas">Alta en proteínas</option>
+          <option value="Vegetariana/Vegana">Vegetariana/Vegana</option>
+          <option value="Desordenada">Desordenada</option>
+        </select>
+      </div>
+      <div>
+        <label class="block font-semibold mb-2">¿Tienes alguna lesión, patología o limitación física que deba tener en cuenta?</label>
+        <textarea id="lesionPatologia" class="w-full border rounded-lg p-3" rows="3" placeholder="Describe cualquier lesión, patología o limitación física que tengas. Si no tienes ninguna, puedes dejar este campo vacío."></textarea>
+      </div>
+      <div>
+        <label class="block font-semibold mb-2">¿Qué te motiva a entrenar o a empezar este proceso ahora? *</label>
+        <textarea id="motivacion" required class="w-full border rounded-lg p-3" rows="3" placeholder="Comparte tu motivación personal - esto nos ayuda a diseñar un plan que realmente conecte contigo"></textarea>
+      </div>
+      <div>
+        <label class="block font-semibold mb-2">¿Qué esperas de mí como entrenador y cómo te gustaría que fuera nuestro seguimiento? *</label>
+        <textarea id="expectativasSeguimiento" required class="w-full border rounded-lg p-3" rows="3" placeholder="Esto me ayuda a adaptar mi estilo de entrenamiento y comunicación a tus preferencias personales"></textarea>
+      </div>
+      <button
+        type="submit"
+        class="w-full py-4 px-8 bg-black hover:bg-green text-white rounded-2xl text-xl font-semibold mt-4"
+      >
+        Enviar vía WhatsApp
+      </button>
+      <p class="text-xs text-white mt-2 text-center">
+        Al enviar este formulario, te redirigiremos a WhatsApp para completar la consulta inicial gratuita
+      </p>
+    </form>
+
+    <script type="module">
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("fitness-form");
+        if (!form) return;
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          // Función para obtener el valor de un elemento por su ID
+          const getValueById = (id) => {
+            const element = document.getElementById(id);
+            return element ? (element as HTMLSelectElement | HTMLTextAreaElement).value : '';
+          };
+
+          const nivel = getValueById("nivelEntrenamiento");
+          const dias = getValueById("diasEntrenamiento");
+          const experiencia = getValueById("experienciaPrevia");
+          const alimentacion = getValueById("alimentacionActual");
+          const lesion = getValueById("lesionPatologia");
+          const motivacion = getValueById("motivacion");
+          const seguimiento = getValueById("expectativasSeguimiento");
+
+          const mensaje = encodeURIComponent(
+            `*Formulario de Consulta Fitness*\n\n` +
+            `*Nivel de entrenamiento actual:* ${nivel}\n` +
+            `*Días a la semana para entrenar:* ${dias}\n` +
+            `*Experiencia previa en ejercicio:* ${experiencia}\n` +
+            `*Tipo de alimentación actual:* ${alimentacion}\n` +
+            `*Lesión/patología/limitación física:* ${lesion || 'Ninguna'}\n` +
+            `*Motivación para entrenar:* ${motivacion}\n` +
+            `*Expectativas del entrenador y seguimiento:* ${seguimiento}`
+          );
+
+          // Asegúrate de reemplazar '34655689827' con tu número de teléfono real si es diferente.
+          const whatsappUrl = `https://wa.me/34655689827?text=${mensaje}`;
+          window.open(whatsappUrl, "_blank");
+        });
+      });
+    </script>
+  </div>
+</Section>
