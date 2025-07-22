@@ -4,13 +4,13 @@ import Section from "./Section.astro";
 ---
 
 <Section id="contact">
-  <div class="mb-[140px] relative">
+  <div class="mb-[140px] relative ">
     <SectionTitle
       sectionTitle="Contacta con nosotros"
       description="Si tienes alguna pregunta o necesitas más información, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte a alcanzar tus objetivos de fitness."
     />
     <form
-      class="max-w-xl mx-auto bg-dark rounded-2xl shadow-lg p-8 space-y-6 text-white"
+      class="max-w-xl mx-auto bg-white rounded-2xl shadow-lg p-8 space-y-6 text-black"
       id="fitness-form"
     >
       <div>
@@ -52,15 +52,15 @@ import Section from "./Section.astro";
       </div>
       <div>
         <label class="block font-semibold mb-2">¿Tienes alguna lesión, patología o limitación física que deba tener en cuenta?</label>
-        <textarea id="lesionPatologia" class="w-full border rounded-lg p-3" rows="3" placeholder="Describe cualquier lesión, patología o limitación física que tengas. Si no tienes ninguna, puedes dejar este campo vacío."></textarea>
+        <textarea id="lesionPatologia" class="w-full border rounded-lg p-3 text-gray-800" rows="3" placeholder="Describe cualquier lesión, patología o limitación física que tengas. Si no tienes ninguna, puedes dejar este campo vacío."></textarea>
       </div>
       <div>
         <label class="block font-semibold mb-2">¿Qué te motiva a entrenar o a empezar este proceso ahora? *</label>
-        <textarea id="motivacion" required class="w-full border rounded-lg p-3" rows="3" placeholder="Comparte tu motivación personal - esto nos ayuda a diseñar un plan que realmente conecte contigo"></textarea>
+        <textarea id="motivacion" required class="w-full border rounded-lg p-3 text-gray-800" rows="3" placeholder="Comparte tu motivación personal - esto nos ayuda a diseñar un plan que realmente conecte contigo"></textarea>
       </div>
       <div>
         <label class="block font-semibold mb-2">¿Qué esperas de mí como entrenador y cómo te gustaría que fuera nuestro seguimiento? *</label>
-        <textarea id="expectativasSeguimiento" required class="w-full border rounded-lg p-3" rows="3" placeholder="Esto me ayuda a adaptar mi estilo de entrenamiento y comunicación a tus preferencias personales"></textarea>
+        <textarea id="expectativasSeguimiento" required class="w-full border rounded-lg p-3 text-gray-800" rows="3" placeholder="Esto me ayuda a adaptar mi estilo de entrenamiento y comunicación a tus preferencias personales"></textarea>
       </div>
       <button
         type="submit"
