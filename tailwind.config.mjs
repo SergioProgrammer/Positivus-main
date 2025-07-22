@@ -33,8 +33,11 @@ export default {
         },
         black: "var(--black)",
         dark: "var(--dark)",
+        gray2: {
+          DEFAULT: "##717171",
+        },
         gray: {
-          DEFAULT: "#717171",
+          DEFAULT: "#E3E3E3",
         },
         white: "var(--white)",
       },
