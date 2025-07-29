@@ -1,7 +1,8 @@
 ---
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 
-const navButton = { href: '#contact', label: 'Pedir Consultoría' };
+const navButton = { href: '/', label: 'Pedir Consultoría' };
+const blogButton = { href: '/blog', label: 'Blog' };
 ---
 
 <div class="mt-20 mb-0">
@@ -20,6 +21,13 @@ const navButton = { href: '#contact', label: 'Pedir Consultoría' };
         <div class="hidden lg:flex items-center gap-4">
           <a class="px-9 py-5 rounded-2xl border border-zinc-900 bg-white hover:bg-black text-black hover:text-white inline-flex" href={navButton.href}>
             <h2 class="text-center text-xl font-normal leading-7">{navButton.label}</h2>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="lg:flex items-center gap-4">
+          <a class="px-9 py-5 rounded-2xl border border-zinc-900 bg-white hover:bg-black text-black hover:text-white inline-flex" href={blogButton.href}>
+            <h2 class="text-center text-xl font-normal leading-7">{blogButton.label}</h2>
           </a>
         </div>
       </div>
