@@ -3,11 +3,6 @@ import siteData from "../../data/siteData.json";
 import jsonLDGenerator from "../../utils/jsonLD";
 
 type Props = {
-  // Pass title and description for internal pages
-  // If not given, this defaults to site data
-  // Url is automatic
-  // Robots are optional
-  // Frontmatter triggers a CMS post type
   title: string;
   description: string;
   url: string;
@@ -17,15 +12,14 @@ type Props = {
 };
 
 const {
-  title,
-  description,
+  title = "EntrenaFácil - Entrenamientos personales en casa",
+  description = "Entrena desde casa con rutinas personalizadas, entrenadores online y resultados reales. Descubre cómo entrenar fácil y eficaz sin salir de casa.",
   url = Astro.url,
   image,
   frontmatter,
   robots,
 } = Astro.props;
 
-// Again, frontmatter triggers CMS post type
 const jsonLD = jsonLDGenerator({
   type: frontmatter ? "post" : "website",
   post: frontmatter,
@@ -37,34 +31,31 @@ const jsonLD = jsonLDGenerator({
 <link rel="canonical" href={url} />
 
 <!-- Open Graph -->
-<meta property="og:site_name" content="Site Name" />
+<meta property="og:site_name" content="EntrenaFácil" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={url} />
 <meta property="og:image" content={image?.src || siteData.image.src} />
 <meta property="og:image:url" content={image?.src || siteData.image.src} />
-<meta
-  property="og:image:secure_url"
-  content={image?.src || siteData.image.src}
-/>
+<meta property="og:image:secure_url" content={image?.src || siteData.image.src} />
 <meta property="og:image:type" content="image/jpeg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="600" />
-<meta property="og:image:alt" content={image?.alt || siteData.image.alt} />
+<meta property="og:image:alt" content={image?.alt || siteData.image.alt || "Entrenamiento personalizado en casa"} />
 
-<!-- Twitter -->
+<!-- Twitter Card -->
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content={image?.src || siteData.image.src} />
-<meta name="twitter:image:alt" content={title} />
-
-<!-- Using environment domain -->
-<meta name="twitter:domain" content={import.meta.env.SITE} />
+<meta name="twitter:image:alt" content={image?.alt || title} />
+<meta name="twitter:site" content="@entrenafacil" />
+<meta name="twitter:domain" content="entrenafacil.es" />
 
 {robots && <meta name="robots" content="noindex, nofollow" />}
 
-<!-- JSON LD -->
+<!-- JSON-LD Schema -->
 <Fragment set:html={jsonLD} />
 
+<!-- Favicon -->
 <link rel="icon" type="image/png" href="/favicon.png" />

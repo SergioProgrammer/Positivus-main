@@ -1,0 +1,23 @@
+---
+import NavBar  from "../components/ui/Navbar.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import Vlog1 from "../components/blog/vlog1.astro";
+import Seo from "../components/seo/Seo.astro";
+const { title, description, image, frontmatter, robots } = Astro.props;
+---
+ 
+<MainLayout
+  title="Blog - Entrena Fácil"
+  description="Descubre consejos, rutinas y guías para mejorar tu entrenamiento y alcanzar tus objetivos de fitness."
+>
+ <Seo
+    {title}
+    {description}
+    url={Astro.url.toString()}
+    {image}
+    {frontmatter}
+    {robots}
+  />
+
+<Vlog1 />
+
